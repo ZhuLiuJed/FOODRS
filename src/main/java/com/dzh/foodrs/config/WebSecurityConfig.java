@@ -19,22 +19,19 @@ import com.dzh.foodrs.repository.UserRepository;
 
 @Configurable
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)//允许进入页面方法前检验
+//@EnableGlobalMethodSecurity(prePostEnabled = true)//允许进入页面方法前检验
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
     private UserRepository userRepository;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(new UserDetailsService() {
-//            public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-//                User user = userRepository.findOneByUsername(s);
-//                return user;
-//            }
-//        }).passwordEncoder(new Md5PasswordEncoder());
-        auth
-        .inMemoryAuthentication()
-            .withUser("admin").password("123456").roles("USER");
+        auth.userDetailsService(new UserDetailsService() {
+            public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+                User user = userRepository.findOneByUsername(s);
+                return user;
+            }
+        }).passwordEncoder(new Md5PasswordEncoder());
     }
 
     @Override
@@ -44,12 +41,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.formLogin()
+            .loginPage("/login")
+            .defaultSuccessUrl("/myhtml")
+            .and().csrf().disable()
+            .headers().frameOptions().sameOrigin();
         http.authorizeRequests()
-        		.antMatchers("/", "/hello").permitAll()
-                .and().formLogin()
-                .loginPage("/sign_in")
-                .defaultSuccessUrl("/myhtml")
-                .and().csrf().disable()
-                .headers().frameOptions().sameOrigin();
+			.antMatchers("/test").authenticated()
+			.anyRequest().permitAll();
     }
    }

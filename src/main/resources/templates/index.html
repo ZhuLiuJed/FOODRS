@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>foodrs</title>
+		<link rel="stylesheet" href="../static/plugins/layui/css/layui.css" media="all"/>
+		<script type="text/javascript" src="../static/plugins/layui/layui.js" ></script>
+		<script type="text/javascript" src="../static/js/jquery-3.2.1.min.js" ></script>
+	</head>
+	<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+    		<div class="layui-logo">foodrs</div>
+			<ul class="layui-nav layui-layout-left">
+			  <li class="layui-nav-item"><a href="">主页</a></li>
+			  <li class="layui-nav-item ">
+			    <a href="javascript:;">精品文章</a>
+			    <dl class="layui-nav-child">
+			      <dd><a href="">测试精品</a></dd>
+			      <dd><a href="">开发精品</a></dd>
+			      <dd><a href="">社区水潭</a></dd>
+			    </dl>
+			  </li>
+			  <li class="layui-nav-item"><a href="">问答专区</a></li>
+			  <li class="layui-nav-item">
+			    <a href="javascript:;">解决方案</a>
+			    <dl class="layui-nav-child">
+			      <dd><a href="">外卖红包</a></dd>
+			      <dd><a href="">内推岗位</a></dd>
+			      <dd class="layui-this"><a href="">相亲榜</a></dd>
+			      <dd><a href="">奖品兑换</a></dd>
+			    </dl>
+			  </li>
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+			   <li class="layui-nav-item lay-unselect layui-hide" >
+			    <a href="javascript:;"><img src="http://t.cn/RCzsdCq" class="layui-nav-img">我</a>
+			    <dl class="layui-nav-child">
+			      <dd><a href="javascript:;">修改信息</a></dd>
+			      <dd><a href="javascript:;">注销</a></dd>
+			    </dl>
+			  </li>
+			   <li class="layui-nav-item ">
+			    <a href="javascript:openlogin();">登录</a>
+			  </li>
+			</ul>
+		</div>
+	</div>
+		
+	</body>
+	
+	<script>
+		layui.use('element', function(){
+		  var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+		});
+	function openlogin(){
+		layui.use('layer', function(){
+	  		var layer = layui.layer;
+			layer.open({
+			  title: false,
+			  type: 2,
+			  Boolean:false,
+			  anim:1,
+			  area: ['400px','350px'],
+			  content: ['../static/form/login.html','no']
+			});
+		})
+	}
+	</script>
+</html>

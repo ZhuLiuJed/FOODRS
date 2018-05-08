@@ -1,0 +1,46 @@
+.foo-panel{
+	margin-bottom: 10px; 
+	margin-top: 10px;
+	border-radius: 2px; 
+	background-color: #fff; 
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);}
+.foo-panel-title {
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+    border-bottom: 2px dotted #E9E9E9;
+    color: #333;
+    border-radius: 2px 2px 0 0;
+    font-size: 14px;}
+.foo-list li{
+	position: relative; 
+	height: 45px; 
+	line-height: 22px; 
+	padding: 15px 15px 15px 75px; 
+	border-bottom: 1px dotted #e2e2e2;}
+.foo-list li:last-child{
+	border-bottom: none;}
+.foo-list li h2,
+.foo-list li h2 a,
+.foo-list-info{
+	white-space: nowrap; 
+	overflow: hidden; 
+	text-overflow: ellipsis;}
+.foo-list li h2{
+	height: 26px; 
+	font-size: 0;}
+.foo-list li h2 a{
+	display: inline-block; 
+	max-width: 80%; 
+	padding-right: 10px; 
+	font-size: 16px;}
+.foo-list li h2 .layui-badge{
+	top: -2px; 
+	height: 16px; 
+	line-height: 16px; 
+	padding: 0 5px; 
+	margin-right: 10px; 
+	font-size: 12px; 
+	border: 1px solid #5FB878; background: none; 
+	color: #5FB878;}

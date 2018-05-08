@@ -8,11 +8,19 @@ public class MainController {
 
 	@GetMapping("/login")
 	public String login(){
-		return "sign_in";
+		return "/login";
 	}
 	
-	@GetMapping("/myhtml")
+	@GetMapping("/index")
 	public String html(){
-		return "MyHtml";
+		return "/index";
 	}
+//	@GetMapping("/user/register")
+//	public String register(){
+//		return "/register";
+//	}
+//	@GetMapping("/user/registercheckuser")
+//	public String registercheckuser(){
+//		return "/registercheckuser";
+//	}
 }

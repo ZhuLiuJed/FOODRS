@@ -13,8 +13,6 @@ import java.util.List;
  */
 public interface UserRepository extends JpaRepository<User, Integer> {
     public User findOneByUsername(String username);
-    public Page<User> findAllByRoleNotOrRoleIsNull(Pageable pageable, Role role);
-    public Page<User> findAllByRoleNotAndUsernameLike(Pageable pageRequest, Role role, String username);
-
     public List<User> findAllByRole(Role role);
+    public User findOneById(String id);
 }

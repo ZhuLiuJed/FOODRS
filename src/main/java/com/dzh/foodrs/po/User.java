@@ -1,53 +1,43 @@
 package com.dzh.foodrs.po;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+
+
+
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by holyfrans on 2017/3/6.
- * ÓÃ»§±í
+ * ï¿½Ã»ï¿½ï¿½ï¿½
  */
 @Entity
 @Table(name = "users")
-public class User implements UserDetails,Serializable {
+public class User implements Serializable,UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @Column(nullable = false, unique = true, length = 10)
     @NotNull
-    @Size(min = 2, max = 10)
+    @Size(min = 5, max = 10)
     private String username;
 
     @Column(nullable = false, length = 63)
     @NotNull
     @Size(min = 6)
     private String password;
-    
-    @OneToOne
-    @JoinColumn(name = "user_info_id")
-    private UserInfo userInfo;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
-
-    public UserInfo getUserInfo() {
-		return userInfo;
-	}
-
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
-	}
 
 	public Role getRole() {
 		return role;
@@ -57,11 +47,11 @@ public class User implements UserDetails,Serializable {
 		this.role = role;
 	}
 
-	public Integer getId() {
+	public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

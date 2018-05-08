@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title></title>
+		<script type="text/javascript" src="../static/js/jquery-3.2.1.min.js" ></script>
+		<link rel="stylesheet" href="../static/css/style.css" />
+		<link rel="stylesheet" href="../static/plugins/layui/css/layui.css" />
+		<script type="text/javascript" src="../static/js/jquery.qrcode.min.js" ></script>
+		<script type="text/javascript" src="../static/plugins/layui/layui.js" ></script>
+		<style>
+		</style>
+	</head>
+	
+	<body class="layui-layout-body" align="center">
+		<div>
+		<div class="layui-col-md2">
+			
+		</div>
+		<div class="layui-col-md8" >
+			<table class="layui-table" >
+			  <th colspan="2">掃完記得標記一下，然數據乾淨點~</th>
+			  <th>
+			  	<button class="layui-btn layui-btn-sm">
+				  <i class="layui-icon">&#x1002;</i>
+				  換一批
+				</button>
+			  </th>
+			  </thead>
+			  <tbody>
+			    <tr align="center">
+			      <td >
+			      	<div  class="wmdiv">
+				      <div class="code"></div>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記無效</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記打假</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記點讚</button>
+				    </div>
+			      </td>
+			       <td>
+			      	<div  class="wmdiv">
+				      <div class="code"></div>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記無效</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記打假</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記點讚</button>
+				    </div>
+			      </td> <td>
+			      	<div  class="wmdiv">
+				      <div class="code"></div>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記無效</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記打假</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記點讚</button>
+				    </div>
+			      </td>
+			    </tr>
+			    <tr align="center">
+			      <td >
+			      	<div  class="wmdiv">
+				      <div class="code"></div>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記無效</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記打假</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記點讚</button>
+				    </div>
+			      </td>
+			       <td>
+			      	<div  class="wmdiv">
+				      <div class="code"></div>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記無效</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記打假</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記點讚</button>
+				    </div>
+			      </td> <td>
+			      	<div  class="wmdiv">
+				      <div class="code"></div>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記無效</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記打假</button>
+				      <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal">標記點讚</button>
+				    </div>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+		<div class="layui-col-md2">
+			
+		</div>
+		</div>
+		<div>
+		</div>
+	</body>
+	<script>
+		$(".code").qrcode({
+			render: "canvas", //table方式
+			width: 200, //宽度
+			height:200, //高度
+			text: "www.helloweba.net" //任意内容
+		});
+	</script>
+</html>

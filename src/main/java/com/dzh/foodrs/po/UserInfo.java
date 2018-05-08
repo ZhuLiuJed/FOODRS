@@ -4,32 +4,29 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * Created by holyfrans on 2017/3/6.
- * 用户信息表
+ * 锟矫伙拷锟斤拷息锟斤拷
  */
 @Entity
 @Table(name = "user_infos")
 public class UserInfo implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @Column(nullable = false, length = 10)
-    @NotNull
     @Size(min = 2, max = 20)
     private String name;
 
     @Column(nullable = false, length = 2)
-    @NotNull
     private String sex;
 
     @Column(nullable = false)
-    @NotNull
     private Integer age;
 
     @Column(length = 30)
@@ -52,23 +49,11 @@ public class UserInfo implements Serializable {
 
 
     /**
-     * 使用StatusConstant类来为其赋值
+     * 鍥剧墖
      */
     @Column(length = 10)
     private String status;
 
-
-    @JsonIgnore
-    @OneToOne(mappedBy = "userInfo")
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
    
 
@@ -81,11 +66,11 @@ public class UserInfo implements Serializable {
     }
 
    
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

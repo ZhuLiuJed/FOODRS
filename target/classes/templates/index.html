@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8"></meta>
 		<title>foodrs</title>
-		<link rel="stylesheet" href="../static/plugins/layui/css/layui.css" media="all"/>
-		<script type="text/javascript" src="../static/plugins/layui/layui.js" ></script>
+		<!--<link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}" media="all"/>
+		<script type="text/javascript" th:src="@{/plugins/layui/layui.js}" ></script>
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" ></script>
+		<script type="text/javascript" th:src="@{/js/jquery.formFill.js}" ></script>-->
+		<link rel="stylesheet" href="../static/plugins/layui/css/layui.css" />
 		<script type="text/javascript" src="../static/js/jquery-3.2.1.min.js" ></script>
+		<script type="text/javascript" src="../static/plugins/layui/layui.js" ></script>
+		<script type="text/javascript" src="../static/js/jquery.formFill.js" ></script>
+		<link rel="stylesheet" href="../static/css/foodrs-index.css" />
 	</head>
 	<body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
@@ -33,36 +40,195 @@
 			  </li>
 			</ul>
 			<ul class="layui-nav layui-layout-right">
-			   <li class="layui-nav-item lay-unselect layui-hide" >
-			    <a href="javascript:;"><img src="http://t.cn/RCzsdCq" class="layui-nav-img">我</a>
+			   <li class="layui-nav-item lay-unselect" th:if="${session.user!=null}">
+			    <a href="javascript:;"><img src="http://t.cn/RCzsdCq" class="layui-nav-img"></img>
+			    	<span th:text="欢迎：+${session.user.username}+肥来！"></span>
+			    	<span th:text="${session.user.id}" id="userid" hidden="hidden"></span>
+			    </a>
 			    <dl class="layui-nav-child">
-			      <dd><a href="javascript:;">修改信息</a></dd>
-			      <dd><a href="javascript:;">注销</a></dd>
+			      <dd><a href="javascript:edit_userinfo();">修改信息</a>
+			      </dd>
+			      <dd><a href="javascript:loginout();">注销</a></dd>
 			    </dl>
 			  </li>
-			   <li class="layui-nav-item ">
+			   <li class="layui-nav-item " th:if="${session.user==null}">
 			    <a href="javascript:openlogin();">登录</a>
 			  </li>
 			</ul>
+		</div>
+		<div class="layui-container">
+			<div class="layui-row layui-col-space15">
+				<div class="layui-col-md8" style="background-color: #00F7DE;">
+					<div class="foo-panel">
+						<div class="foo-panel-title">
+							最新
+						</div>
+						<ul>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+							
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+							
+						</ul>
+					</div>
+				</div>
+				<div class="layui-col-md4" style="background-color: #31708F;">
+					<div class="foo-panel">
+						<div class="foo-panel-title">
+							最新
+						</div>
+						<ul>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+						</ul>
+					</div>
+					<div class="foo-panel">
+						<div class="foo-panel-title">
+							最新
+						</div>
+						<ul>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 		
 	</body>
 	
-	<script>
+	<script th:inline="javascript">
+		//全局變量
+		var title_update = "修改个人信息";
+		var url_form = '/form/edit-user-info.html';
+		var url_one = '/user/userinfo-get';
+		var layer
+		layui.config({
+				base: '/js/'
+			});
 		layui.use('element', function(){
 		  var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
 		});
+		layui.use('layer', function(){
+	  		 layer= layui.layer;})
+	  	
 	function openlogin(){
 		layui.use('layer', function(){
 	  		var layer = layui.layer;
 			layer.open({
 			  title: false,
-			  type: 2, 
-			  area: ['400px', '300px'],
-			  content: ['../static/form/login.html','no']
+			  type: 2,
+			  Boolean:false,
+			  anim:1,
+			  area: ['400px','350px'],
+			  content: ['/login.html','no']
 			});
 		})
+	
 	}
+	function loginout(){
+	  		 $.ajax({
+ 					type:"get",
+ 					url:"/user/loginout",
+ 					contentType: 'application/json',
+					success: function (data) {
+						if(data.code == "1"){
+						parent.layer.msg(data.msg);
+						location.reload();  
+						}else{
+						layer.msg(data.msg);
+						}
+					},
+					error: function () {
+						
+					}
+ 				});
+	}
+	function edit_userinfo(){
+		layui.use('form',function(){
+		 $.get(url_form, null, function(form) {
+            addBoxIndex = layer.open({
+                type: 1,
+                title: title_update,
+                content: form,
+                btn: ['保存', '取消'],
+                shade: false,
+                offset: ['100px', '30%'],
+                area: ['600px', '400px'],
+                zIndex: 1995,
+                maxmin: true,
+                yes: function(index) {
+                    //触发表单的提交事件
+                    $('form.layui-form').find('button[lay-filter=edit]').click();
+                },
+                full: function(elem) {
+                    var win = window.top === window.self ? window : parent.window;
+                    $(win).on('resize', function() {
+                        var $this = $(this);
+                        elem.width($this.width()).height($this.height()).css({
+                            top: 0,
+                            left: 0
+                        });
+                        elem.children('div.layui-layer-content').height($this.height() - 95);
+                    });
+                },
+                success: function(layero, index) {
+                    //弹出窗口成功后渲染表单
+                   form =layui.form;
+                    var idData = {
+                        id: $("#userid").text()
+					}
+                    $.ajax({
+                        type: 'post',
+                        contentType:'application/json',
+ 						dataType: "json",
+                        url: url_one,
+                        data: JSON.stringify(idData),
+                        success: function(data) {
+                            $("#fm").fill(data.content);
+                            form.render();
+                        }
+                    });
+
+                    form.on('submit(edit)', function(data) {
+                        data.field['id'] = id;
+                        var d = JSON.stringify(data.field);
+                        $.ajax({
+                            type: 'put',
+                            contentType:'application/json',
+                            url: url_update,
+                            data: d,
+                            success: function (message) {
+                                layer.close(index);
+                                paging.get();
+                            }
+                        });
+                        form.render();
+                        return false;
+                    });
+                },
+                end: function() {
+                    addBoxIndex = -1;
+                }
+            });
+        });
+	  });
+	}
+	
 	</script>
 </html>
